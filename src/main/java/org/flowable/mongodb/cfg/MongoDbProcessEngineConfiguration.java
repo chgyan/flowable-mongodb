@@ -182,6 +182,9 @@ public class MongoDbProcessEngineConfiguration extends ProcessEngineConfiguratio
         MongoDbHistoricDetailDataManager mongoDbHistoricDetailDataManager = new MongoDbHistoricDetailDataManager(this);
         this.historicDetailDataManager = mongoDbHistoricDetailDataManager;
 
+        MongoDbJobByteArrayDataManager mongoDbJobByteArrayDataManager = new MongoDbJobByteArrayDataManager(this);
+        this.byteArrayDataManager = mongoDbJobByteArrayDataManager;
+
     }
 
     @Override

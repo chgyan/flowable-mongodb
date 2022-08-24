@@ -47,7 +47,15 @@ public class MongoDbModelDataManager extends AbstractMongoDbDataManager<ModelEnt
 
     @Override
     public BasicDBObject createUpdateObject(Entity entity) {
-        return null;
+        ModelEntity modelEntity = (ModelEntity) entity;
+        BasicDBObject updateObject = null;
+        updateObject = setUpdateProperty(modelEntity, "lastUpdateTime", modelEntity.getLastUpdateTime(), updateObject);
+        updateObject = setUpdateProperty(modelEntity, "editorSourceValueId", modelEntity.getEditorSourceValueId(), updateObject);
+        updateObject = setUpdateProperty(modelEntity, "editorSourceExtraValueId", modelEntity.getEditorSourceExtraValueId(), updateObject);
+        updateObject = setUpdateProperty(modelEntity, "category", modelEntity.getCategory(), updateObject);
+        updateObject = setUpdateProperty(modelEntity, "name", modelEntity.getName(), updateObject);
+        updateObject = setUpdateProperty(modelEntity, "metaInfo", modelEntity.getMetaInfo(), updateObject);
+        return updateObject;
     }
 
     @Override

@@ -14,10 +14,12 @@ package org.flowable.mongodb.persistence.manager;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.model.Filters;
+import org.flowable.common.engine.impl.AbstractEngineConfiguration;
 import org.flowable.common.engine.impl.persistence.entity.ByteArrayEntity;
 import org.flowable.common.engine.impl.persistence.entity.ByteArrayEntityImpl;
 import org.flowable.common.engine.impl.persistence.entity.Entity;
 import org.flowable.common.engine.impl.persistence.entity.data.ByteArrayDataManager;
+import org.flowable.mongodb.cfg.MongoDbProcessEngineConfiguration;
 
 import java.util.List;
 
@@ -28,6 +30,9 @@ public class MongoDbJobByteArrayDataManager extends AbstractMongoDbDataManager<B
 
     public static final String COLLECTION_JOB_BYTE_ARRAY = "jobByteArrays";
 
+    public MongoDbJobByteArrayDataManager(MongoDbProcessEngineConfiguration engineConfiguration) {
+        super(engineConfiguration);
+    }
     @Override
     public String getCollection() {
         return COLLECTION_JOB_BYTE_ARRAY;
