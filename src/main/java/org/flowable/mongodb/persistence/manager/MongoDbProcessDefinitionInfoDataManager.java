@@ -12,12 +12,11 @@
  */
 package org.flowable.mongodb.persistence.manager;
 
+import com.mongodb.BasicDBObject;
 import org.flowable.common.engine.impl.persistence.entity.Entity;
 import org.flowable.engine.impl.persistence.entity.ProcessDefinitionInfoEntity;
 import org.flowable.engine.impl.persistence.entity.data.ProcessDefinitionInfoDataManager;
 import org.flowable.mongodb.cfg.MongoDbProcessEngineConfiguration;
-
-import com.mongodb.BasicDBObject;
 
 /**
  * @author Joram Barrez

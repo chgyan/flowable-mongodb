@@ -12,16 +12,15 @@
  */
 package org.flowable.mongodb.persistence.manager;
 
-import java.util.List;
-
+import com.mongodb.BasicDBObject;
+import com.mongodb.client.model.Filters;
 import org.flowable.common.engine.impl.persistence.entity.Entity;
 import org.flowable.engine.impl.persistence.entity.ResourceEntity;
 import org.flowable.engine.impl.persistence.entity.ResourceEntityImpl;
 import org.flowable.engine.impl.persistence.entity.data.ResourceDataManager;
 import org.flowable.mongodb.cfg.MongoDbProcessEngineConfiguration;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.client.model.Filters;
+import java.util.List;
 
 /**
  * @author Joram Barrez

@@ -12,7 +12,6 @@
  */
 package org.flowable.mongodb.cfg;
 
-import org.flowable.mongodb.persistence.MongoDbSessionFactory;
 import org.flowable.mongodb.persistence.manager.MongoDbHistoricTaskInstanceDataManager;
 import org.flowable.mongodb.persistence.manager.MongoDbTaskDataManager;
 import org.flowable.task.service.TaskServiceConfiguration;

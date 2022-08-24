@@ -12,15 +12,14 @@
  */
 package org.flowable.mongodb.persistence.manager;
 
-import java.util.List;
-
+import com.mongodb.BasicDBObject;
+import com.mongodb.client.model.Filters;
 import org.flowable.common.engine.impl.persistence.entity.ByteArrayEntity;
 import org.flowable.common.engine.impl.persistence.entity.ByteArrayEntityImpl;
 import org.flowable.common.engine.impl.persistence.entity.Entity;
 import org.flowable.common.engine.impl.persistence.entity.data.ByteArrayDataManager;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.client.model.Filters;
+import java.util.List;
 
 /**
  * @author Joram Barrez

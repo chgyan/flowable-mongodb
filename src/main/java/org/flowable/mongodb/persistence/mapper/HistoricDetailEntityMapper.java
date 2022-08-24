@@ -14,16 +14,8 @@ package org.flowable.mongodb.persistence.mapper;
 
 import org.bson.Document;
 import org.flowable.common.engine.api.FlowableException;
-import org.flowable.engine.history.HistoricVariableUpdate;
-import org.flowable.engine.impl.persistence.entity.HistoricDetailEntity;
-import org.flowable.engine.impl.persistence.entity.HistoricDetailEntityImpl;
-import org.flowable.engine.impl.persistence.entity.HistoricDetailVariableInstanceUpdateEntity;
-import org.flowable.engine.impl.persistence.entity.HistoricDetailVariableInstanceUpdateEntityImpl;
-import org.flowable.engine.impl.persistence.entity.HistoricFormPropertyEntity;
-import org.flowable.engine.impl.persistence.entity.HistoricFormPropertyEntityImpl;
+import org.flowable.engine.impl.persistence.entity.*;
 import org.flowable.engine.impl.util.CommandContextUtil;
-import org.flowable.mongodb.persistence.EntityToDocumentMapper;
-import org.flowable.variable.api.types.VariableTypes;
 
 /**
  * @author Joram Barrez

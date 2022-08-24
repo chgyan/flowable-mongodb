@@ -12,9 +12,8 @@
  */
 package org.flowable.mongodb.persistence.manager;
 
-import java.util.List;
-import java.util.Map;
-
+import com.mongodb.BasicDBObject;
+import com.mongodb.client.model.Filters;
 import org.flowable.common.engine.impl.persistence.entity.Entity;
 import org.flowable.variable.api.history.HistoricVariableInstance;
 import org.flowable.variable.service.impl.HistoricVariableInstanceQueryImpl;
@@ -23,8 +22,8 @@ import org.flowable.variable.service.impl.persistence.entity.HistoricVariableIns
 import org.flowable.variable.service.impl.persistence.entity.data.HistoricVariableInstanceDataManager;
 import org.flowable.variable.service.impl.persistence.entity.data.impl.cachematcher.HistoricVariableInstanceByProcInstMatcher;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.client.model.Filters;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Tijs Rademakers

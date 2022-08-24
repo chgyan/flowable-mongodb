@@ -14,7 +14,6 @@ package org.flowable.mongodb.persistence.mapper;
 
 import org.bson.Document;
 import org.flowable.job.service.impl.persistence.entity.JobEntityImpl;
-import org.flowable.mongodb.persistence.EntityToDocumentMapper;
 
 public class JobEntityMapper extends AbstractJobEntityMapper<JobEntityImpl> {
 

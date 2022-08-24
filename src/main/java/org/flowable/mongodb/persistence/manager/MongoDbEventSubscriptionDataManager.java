@@ -12,29 +12,18 @@
  */
 package org.flowable.mongodb.persistence.manager;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
+import com.mongodb.BasicDBObject;
+import com.mongodb.client.model.Filters;
 import org.bson.conversions.Bson;
 import org.flowable.common.engine.impl.persistence.entity.Entity;
 import org.flowable.eventsubscription.api.EventSubscription;
 import org.flowable.eventsubscription.service.impl.EventSubscriptionQueryImpl;
-import org.flowable.eventsubscription.service.impl.persistence.entity.CompensateEventSubscriptionEntity;
-import org.flowable.eventsubscription.service.impl.persistence.entity.CompensateEventSubscriptionEntityImpl;
-import org.flowable.eventsubscription.service.impl.persistence.entity.EventSubscriptionEntity;
-import org.flowable.eventsubscription.service.impl.persistence.entity.GenericEventSubscriptionEntity;
-import org.flowable.eventsubscription.service.impl.persistence.entity.GenericEventSubscriptionEntityImpl;
-import org.flowable.eventsubscription.service.impl.persistence.entity.MessageEventSubscriptionEntity;
-import org.flowable.eventsubscription.service.impl.persistence.entity.MessageEventSubscriptionEntityImpl;
-import org.flowable.eventsubscription.service.impl.persistence.entity.SignalEventSubscriptionEntity;
-import org.flowable.eventsubscription.service.impl.persistence.entity.SignalEventSubscriptionEntityImpl;
+import org.flowable.eventsubscription.service.impl.persistence.entity.*;
 import org.flowable.eventsubscription.service.impl.persistence.entity.data.EventSubscriptionDataManager;
-import org.flowable.mongodb.cfg.MongoDbEventSubscriptionServiceConfiguration;
-import org.flowable.mongodb.cfg.MongoDbProcessEngineConfiguration;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.client.model.Filters;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author Joram Barrez

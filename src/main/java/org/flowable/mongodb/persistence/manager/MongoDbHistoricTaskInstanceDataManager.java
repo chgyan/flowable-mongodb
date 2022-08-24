@@ -12,9 +12,8 @@
  */
 package org.flowable.mongodb.persistence.manager;
 
-import java.util.List;
-import java.util.Map;
-
+import com.mongodb.BasicDBObject;
+import com.mongodb.client.model.Filters;
 import org.flowable.common.engine.impl.persistence.entity.Entity;
 import org.flowable.task.api.history.HistoricTaskInstance;
 import org.flowable.task.service.impl.HistoricTaskInstanceQueryImpl;
@@ -23,8 +22,8 @@ import org.flowable.task.service.impl.persistence.entity.HistoricTaskInstanceEnt
 import org.flowable.task.service.impl.persistence.entity.TaskEntity;
 import org.flowable.task.service.impl.persistence.entity.data.HistoricTaskInstanceDataManager;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.client.model.Filters;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Tijs Rademakers

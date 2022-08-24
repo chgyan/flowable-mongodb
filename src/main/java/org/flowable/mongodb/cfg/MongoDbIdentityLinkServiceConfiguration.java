@@ -13,7 +13,6 @@
 package org.flowable.mongodb.cfg;
 
 import org.flowable.identitylink.service.IdentityLinkServiceConfiguration;
-import org.flowable.mongodb.persistence.MongoDbSessionFactory;
 import org.flowable.mongodb.persistence.manager.MongoDbHistoricIdentityLinkDataManager;
 import org.flowable.mongodb.persistence.manager.MongoDbIdentityLinkDataManager;
 

@@ -12,33 +12,22 @@
  */
 package org.flowable.mongodb.persistence.manager;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
+import com.mongodb.BasicDBObject;
+import com.mongodb.client.model.Filters;
 import org.bson.conversions.Bson;
 import org.flowable.common.engine.impl.persistence.cache.CachedEntityMatcher;
 import org.flowable.common.engine.impl.persistence.entity.Entity;
-import org.flowable.engine.history.HistoricProcessInstance;
 import org.flowable.engine.impl.ActivityInstanceQueryImpl;
-import org.flowable.engine.impl.HistoricProcessInstanceQueryImpl;
 import org.flowable.engine.impl.persistence.entity.ActivityInstanceEntity;
 import org.flowable.engine.impl.persistence.entity.ActivityInstanceEntityImpl;
-import org.flowable.engine.impl.persistence.entity.ExecutionEntity;
-import org.flowable.engine.impl.persistence.entity.HistoricProcessInstanceEntity;
-import org.flowable.engine.impl.persistence.entity.HistoricProcessInstanceEntityImpl;
 import org.flowable.engine.impl.persistence.entity.data.ActivityInstanceDataManager;
-import org.flowable.engine.impl.persistence.entity.data.HistoricProcessInstanceDataManager;
 import org.flowable.engine.impl.persistence.entity.data.impl.cachematcher.ActivityInstanceMatcher;
 import org.flowable.engine.runtime.ActivityInstance;
 import org.flowable.mongodb.cfg.MongoDbProcessEngineConfiguration;
-import org.flowable.task.service.impl.persistence.entity.TaskEntity;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.client.model.Filters;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MongoDbActivityInstanceDataManager extends AbstractMongoDbDataManager<ActivityInstanceEntity> implements ActivityInstanceDataManager {
 

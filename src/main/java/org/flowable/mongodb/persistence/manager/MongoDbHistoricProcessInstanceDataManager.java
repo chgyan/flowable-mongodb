@@ -12,12 +12,8 @@
  */
 package org.flowable.mongodb.persistence.manager;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
+import com.mongodb.BasicDBObject;
+import com.mongodb.client.model.Filters;
 import org.bson.conversions.Bson;
 import org.flowable.common.engine.impl.persistence.entity.Entity;
 import org.flowable.engine.history.HistoricProcessInstance;
@@ -28,8 +24,11 @@ import org.flowable.engine.impl.persistence.entity.HistoricProcessInstanceEntity
 import org.flowable.engine.impl.persistence.entity.data.HistoricProcessInstanceDataManager;
 import org.flowable.mongodb.cfg.MongoDbProcessEngineConfiguration;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.client.model.Filters;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author Tijs Rademakers

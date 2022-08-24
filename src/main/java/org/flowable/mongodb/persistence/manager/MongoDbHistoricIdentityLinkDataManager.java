@@ -12,16 +12,15 @@
  */
 package org.flowable.mongodb.persistence.manager;
 
-import java.util.List;
-
+import com.mongodb.BasicDBObject;
+import com.mongodb.client.model.Filters;
 import org.flowable.common.engine.impl.persistence.entity.Entity;
 import org.flowable.identitylink.service.impl.persistence.entity.HistoricIdentityLinkEntity;
 import org.flowable.identitylink.service.impl.persistence.entity.HistoricIdentityLinkEntityImpl;
 import org.flowable.identitylink.service.impl.persistence.entity.data.HistoricIdentityLinkDataManager;
 import org.flowable.identitylink.service.impl.persistence.entity.data.impl.cachematcher.HistoricIdentityLinksByProcInstMatcher;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.client.model.Filters;
+import java.util.List;
 
 /**
  * @author Tijs Rademakers

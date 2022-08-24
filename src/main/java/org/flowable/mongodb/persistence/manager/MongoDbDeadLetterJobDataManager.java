@@ -12,16 +12,15 @@
  */
 package org.flowable.mongodb.persistence.manager;
 
-import java.util.Collections;
-import java.util.List;
-
+import com.mongodb.BasicDBObject;
 import org.flowable.common.engine.impl.persistence.entity.Entity;
 import org.flowable.job.api.Job;
 import org.flowable.job.service.impl.DeadLetterJobQueryImpl;
 import org.flowable.job.service.impl.persistence.entity.DeadLetterJobEntity;
 import org.flowable.job.service.impl.persistence.entity.data.DeadLetterJobDataManager;
 
-import com.mongodb.BasicDBObject;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author Joram Barrez

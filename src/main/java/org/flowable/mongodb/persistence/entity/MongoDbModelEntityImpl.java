@@ -12,9 +12,9 @@
  */
 package org.flowable.mongodb.persistence.entity;
 
-import java.util.Map;
-
 import org.flowable.engine.impl.persistence.entity.ModelEntityImpl;
+
+import java.util.Map;
 
 /**
  * @author Joram Barrez

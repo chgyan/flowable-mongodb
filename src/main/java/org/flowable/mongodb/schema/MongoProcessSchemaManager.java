@@ -12,40 +12,6 @@
  */
 package org.flowable.mongodb.schema;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-
-import org.bson.Document;
-import org.flowable.common.engine.api.FlowableException;
-import org.flowable.common.engine.impl.FlowableVersions;
-import org.flowable.common.engine.impl.db.SchemaManager;
-import org.flowable.engine.impl.util.CommandContextUtil;
-import org.flowable.mongodb.cfg.MongoDbProcessEngineConfiguration;
-import org.flowable.mongodb.persistence.MongoDbSession;
-import org.flowable.mongodb.persistence.MongoDbSessionFactory;
-import org.flowable.mongodb.persistence.manager.MongoDbEventSubscriptionDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbExecutionDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbHistoricActivityInstanceDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbHistoricIdentityLinkDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbHistoricProcessInstanceDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbHistoricTaskInstanceDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbHistoricVariableInstanceDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbIdentityLinkDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbJobByteArrayDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbJobDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbProcessDefinitionDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbResourceDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbTaskDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbTimerJobDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbVariableInstanceDataManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.mongodb.ErrorCategory;
 import com.mongodb.MongoWriteException;
 import com.mongodb.client.FindIterable;
@@ -54,6 +20,19 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoIterable;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.IndexOptions;
+import org.bson.Document;
+import org.flowable.common.engine.api.FlowableException;
+import org.flowable.common.engine.impl.FlowableVersions;
+import org.flowable.common.engine.impl.db.SchemaManager;
+import org.flowable.engine.impl.util.CommandContextUtil;
+import org.flowable.mongodb.cfg.MongoDbProcessEngineConfiguration;
+import org.flowable.mongodb.persistence.MongoDbSession;
+import org.flowable.mongodb.persistence.MongoDbSessionFactory;
+import org.flowable.mongodb.persistence.manager.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.*;
 
 /**
  * Note that the term 'schema' is not the same as for a relational database.

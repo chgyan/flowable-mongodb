@@ -12,11 +12,10 @@
  */
 package org.flowable.mongodb.transaction;
 
+import com.mongodb.client.MongoClient;
 import org.flowable.common.engine.impl.cfg.TransactionContext;
 import org.flowable.common.engine.impl.cfg.TransactionContextFactory;
 import org.flowable.common.engine.impl.interceptor.CommandContext;
-
-import com.mongodb.MongoClient;
 
 /**
  * @author Joram Barrez
@@ -25,6 +24,7 @@ public class MongoDbTransactionContextFactory implements TransactionContextFacto
     
     protected MongoClient mongoClient;
 
+    @Override
     public TransactionContext openTransactionContext(CommandContext commandContext) {
         return new MongoDbTransactionContext(commandContext);
     }

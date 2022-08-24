@@ -13,18 +13,33 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <skipTests>true</skipTests>
+        <pom.snapshotRepository.id>zit</pom.snapshotRepository.id>
+        <pom.snapshotRepository.url>http://admin:1qazxCDE#@192.168.100.125:8081/repository/maven-snapshots/
+        </pom.snapshotRepository.url>
     </properties>
-
+    <distributionManagement>
+        <!--        <repository>-->
+        <!--            <id>${pom.repository.id}</id>-->
+        <!--            <url>${pom.repository.url}</url>-->
+        <!--        </repository>-->
+        <snapshotRepository>
+            <id>${pom.snapshotRepository.id}</id>
+            <name>snapshot</name>
+            <url>${pom.snapshotRepository.url}</url>
+            <layout>default</layout>
+        </snapshotRepository>
+    </distributionManagement>
     <dependencies>
         <dependency>
             <groupId>org.flowable</groupId>
             <artifactId>flowable-engine</artifactId>
-            <version>6.6.0-SNAPSHOT</version>
+            <version>6.6.0</version>
         </dependency>
         <dependency>
             <groupId>org.mongodb</groupId>
-            <artifactId>mongodb-driver</artifactId>
-            <version>3.12.7</version>
+            <artifactId>mongodb-driver-sync</artifactId>
+            <version>4.4.2</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.uuid</groupId>
@@ -73,20 +88,20 @@
                             </execution>
                         </executions>
                     </plugin>
-                    <plugin>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <configuration>
-                            <additionalparam>-Xdoclint:none</additionalparam>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <id>attach-javadocs</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
+<!--                    <plugin>-->
+<!--                        <artifactId>maven-javadoc-plugin</artifactId>-->
+<!--                        <configuration>-->
+<!--                            <additionalparam>-Xdoclint:none</additionalparam>-->
+<!--                        </configuration>-->
+<!--                        <executions>-->
+<!--                            <execution>-->
+<!--                                <id>attach-javadocs</id>-->
+<!--                                <goals>-->
+<!--                                    <goal>jar</goal>-->
+<!--                                </goals>-->
+<!--                            </execution>-->
+<!--                        </executions>-->
+<!--                    </plugin>-->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
@@ -105,19 +120,6 @@
         </profile>
     </profiles>
 
-    <distributionManagement>
-        <repository>
-            <id>sonatype-nexus-staging</id>
-            <name>Nexus Release Repository</name>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-        <snapshotRepository>
-            <id>sonatype-nexus-snapshots</id>
-            <name>Sonatype Nexus Snapshots</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
-    
     <url>http://www.flowable.org</url>
 	<licenses>
 		<license>

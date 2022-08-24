@@ -12,16 +12,10 @@
  */
 package org.flowable.mongodb.transaction;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.flowable.common.engine.impl.cfg.TransactionContext;
 import org.flowable.common.engine.impl.cfg.TransactionListener;
 import org.flowable.common.engine.impl.cfg.TransactionPropagation;
 import org.flowable.common.engine.impl.cfg.TransactionState;
-import org.flowable.common.engine.impl.context.Context;
 import org.flowable.common.engine.impl.interceptor.Command;
 import org.flowable.common.engine.impl.interceptor.CommandConfig;
 import org.flowable.common.engine.impl.interceptor.CommandContext;
@@ -30,6 +24,11 @@ import org.flowable.engine.impl.util.CommandContextUtil;
 import org.flowable.mongodb.persistence.MongoDbSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Joram Barrez

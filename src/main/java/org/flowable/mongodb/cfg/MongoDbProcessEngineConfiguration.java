@@ -12,9 +12,9 @@
  */
 package org.flowable.mongodb.cfg;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoDatabase;
 import org.flowable.common.engine.api.scope.ScopeTypes;
 import org.flowable.common.engine.impl.interceptor.CommandInterceptor;
 import org.flowable.common.engine.impl.persistence.GenericManagerFactory;
@@ -27,49 +27,23 @@ import org.flowable.eventsubscription.service.EventSubscriptionServiceConfigurat
 import org.flowable.identitylink.service.IdentityLinkServiceConfiguration;
 import org.flowable.job.service.JobServiceConfiguration;
 import org.flowable.mongodb.persistence.MongoDbSessionFactory;
-import org.flowable.mongodb.persistence.manager.AbstractMongoDbDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbActivityInstanceDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbCommentDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbDeploymentDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbEventSubscriptionDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbExecutionDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbExternalWorkerJobDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbHistoricActivityInstanceDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbHistoricDetailDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbHistoricIdentityLinkDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbHistoricProcessInstanceDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbHistoricTaskInstanceDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbHistoricVariableInstanceDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbIdentityLinkDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbJobDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbModelDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbProcessDefinitionDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbProcessDefinitionInfoDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbResourceDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbTaskDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbTimerJobDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbVariableInstanceDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbDeadLetterJobDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbSuspendedJobDataManager;
+import org.flowable.mongodb.persistence.manager.*;
 import org.flowable.mongodb.schema.MongoProcessSchemaManager;
 import org.flowable.mongodb.transaction.MongoDbTransactionContextFactory;
-import org.flowable.mongodb.transaction.MongoDbTransactionInterceptor;
 import org.flowable.task.service.TaskServiceConfiguration;
 import org.flowable.variable.service.VariableServiceConfiguration;
 
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientOptions;
-import com.mongodb.ServerAddress;
-import com.mongodb.client.MongoDatabase;
+import java.util.ArrayList;
 
 /**
  * @author Joram Barrez
  */
 public class MongoDbProcessEngineConfiguration extends ProcessEngineConfigurationImpl {
 
-    protected List<ServerAddress> serverAddresses = new ArrayList<>();
+//    protected List<ServerAddress> serverAddresses = new ArrayList<>();
+    protected String uri = "";
     protected String databaseName = "flowable";
-    protected MongoClientOptions mongoClientOptions;
+//    protected MongoClientOptions mongoClientOptions;
     protected MongoClient mongoClient;
     protected MongoDatabase mongoDatabase;
     protected MongoProcessSchemaManager processSchemaManager;
@@ -134,11 +108,12 @@ public class MongoDbProcessEngineConfiguration extends ProcessEngineConfiguratio
 
     @Override
     public void initNonRelationalDataSource() {
-        if (this.mongoClientOptions == null) {
-            this.mongoClientOptions = MongoClientOptions.builder().build();
-        }
+//        if (this.mongoClientOptions == null) {
+//            this.mongoClientOptions = MongoClientOptions.builder().build();
+//        }
         if (this.mongoClient == null) {
-            this.mongoClient = new com.mongodb.MongoClient(serverAddresses, mongoClientOptions);
+            this.mongoClient = MongoClients.create(uri);
+//                    new com.mongodb.client.MongoClient(serverAddresses, mongoClientOptions);
         }
 
         if (this.mongoDatabase == null)  {
@@ -151,6 +126,7 @@ public class MongoDbProcessEngineConfiguration extends ProcessEngineConfiguratio
         this.schemaManager = new MongoProcessSchemaManager();
     }
 
+    @Override
     public void initSchemaManagementCommand() {
         // Impl note: the schemaMgmtCmd of the regular impl is reused, as it will delegate to the MongoProcessSchemaManager class
         if (schemaManagementCmd == null) {
@@ -259,33 +235,33 @@ public class MongoDbProcessEngineConfiguration extends ProcessEngineConfiguratio
         }
     }
 
-    public List<ServerAddress> getServerAddresses() {
-        return serverAddresses;
-    }
-
-    public MongoDbProcessEngineConfiguration setServerAddresses(List<ServerAddress> serverAddresses) {
-        this.serverAddresses = serverAddresses;
-        return this;
-    }
+//    public List<ServerAddress> getServerAddresses() {
+//        return serverAddresses;
+//    }
+//
+//    public MongoDbProcessEngineConfiguration setServerAddresses(List<ServerAddress> serverAddresses) {
+//        this.serverAddresses = serverAddresses;
+//        return this;
+//    }
 
     /**
      * server addresses in the form of "host:port, host:port, ..."
      */
-    public MongoDbProcessEngineConfiguration setConnectionUrl(String connectionUrl) {
-        List<ServerAddress> result = new ArrayList<>();
-
-        String[] addresses = connectionUrl.split(",");
-        for (String address : addresses) {
-            String[] splittedAddress = address.split(":");
-            String host = splittedAddress[0].trim();
-            int port = Integer.valueOf(splittedAddress[1].trim());
-
-            result.add(new ServerAddress(host, port));
-        }
-
-        setServerAddresses(result);
-        return this;
-    }
+//    public MongoDbProcessEngineConfiguration setConnectionUrl(String connectionUrl) {
+//        List<ServerAddress> result = new ArrayList<>();
+//
+//        String[] addresses = connectionUrl.split(",");
+//        for (String address : addresses) {
+//            String[] splittedAddress = address.split(":");
+//            String host = splittedAddress[0].trim();
+//            int port = Integer.valueOf(splittedAddress[1].trim());
+//
+//            result.add(new ServerAddress(host, port));
+//        }
+//
+//        setServerAddresses(result);
+//        return this;
+//    }
 
     public String getDatabaseName() {
         return databaseName;
@@ -296,13 +272,22 @@ public class MongoDbProcessEngineConfiguration extends ProcessEngineConfiguratio
         return this;
     }
 
-    public MongoClientOptions getMongoClientOptions() {
-        return mongoClientOptions;
+    public String getUri() {
+        return uri;
     }
 
-    public void setMongoClientOptions(MongoClientOptions mongoClientOptions) {
-        this.mongoClientOptions = mongoClientOptions;
+    public MongoDbProcessEngineConfiguration setUri(String uri) {
+        this.uri = uri;
+        return this;
     }
+
+    //    public MongoClientOptions getMongoClientOptions() {
+//        return mongoClientOptions;
+//    }
+//
+//    public void setMongoClientOptions(MongoClientOptions mongoClientOptions) {
+//        this.mongoClientOptions = mongoClientOptions;
+//    }
 
     public MongoClient getMongoClient() {
         return mongoClient;

@@ -12,10 +12,8 @@
  */
 package org.flowable.mongodb.persistence.manager;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
+import com.mongodb.BasicDBObject;
+import com.mongodb.client.model.Filters;
 import org.bson.conversions.Bson;
 import org.flowable.common.engine.impl.Page;
 import org.flowable.common.engine.impl.persistence.entity.Entity;
@@ -27,8 +25,9 @@ import org.flowable.job.service.impl.persistence.entity.TimerJobEntity;
 import org.flowable.job.service.impl.persistence.entity.TimerJobEntityImpl;
 import org.flowable.job.service.impl.persistence.entity.data.TimerJobDataManager;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.client.model.Filters;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author Joram Barrez

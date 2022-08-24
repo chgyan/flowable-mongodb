@@ -12,22 +12,16 @@
  */
 package org.flowable.mongodb.persistence;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-
+import com.mongodb.BasicDBObject;
+import com.mongodb.ClientSessionOptions;
+import com.mongodb.client.*;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.result.DeleteResult;
+import com.mongodb.client.result.UpdateResult;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.flowable.common.engine.api.FlowableIllegalArgumentException;
 import org.flowable.common.engine.api.FlowableOptimisticLockingException;
-import org.flowable.common.engine.impl.context.Context;
 import org.flowable.common.engine.impl.db.HasRevision;
 import org.flowable.common.engine.impl.interceptor.Session;
 import org.flowable.common.engine.impl.persistence.cache.CachedEntity;
@@ -39,16 +33,8 @@ import org.flowable.engine.impl.util.CommandContextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.ClientSessionOptions;
-import com.mongodb.MongoClient;
-import com.mongodb.client.ClientSession;
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Filters;
-import com.mongodb.client.result.DeleteResult;
-import com.mongodb.client.result.UpdateResult;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Joram Barrez

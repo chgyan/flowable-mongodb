@@ -12,10 +12,9 @@
  */
 package org.flowable.mongodb.persistence.manager;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
+import com.mongodb.BasicDBObject;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Sorts;
 import org.bson.conversions.Bson;
 import org.flowable.common.engine.impl.persistence.entity.Entity;
 import org.flowable.engine.ProcessEngineConfiguration;
@@ -26,9 +25,9 @@ import org.flowable.engine.repository.Model;
 import org.flowable.mongodb.cfg.MongoDbProcessEngineConfiguration;
 import org.flowable.mongodb.persistence.entity.MongoDbModelEntityImpl;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.client.model.Filters;
-import com.mongodb.client.model.Sorts;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Joram Barrez

@@ -12,24 +12,17 @@
  */
 package org.flowable.mongodb.persistence.manager;
 
-import java.util.List;
-import java.util.Map;
-
+import com.mongodb.BasicDBObject;
+import com.mongodb.client.model.Filters;
 import org.flowable.common.engine.impl.persistence.entity.Entity;
 import org.flowable.engine.history.HistoricDetail;
 import org.flowable.engine.impl.HistoricDetailQueryImpl;
-import org.flowable.engine.impl.persistence.entity.HistoricDetailAssignmentEntity;
-import org.flowable.engine.impl.persistence.entity.HistoricDetailAssignmentEntityImpl;
-import org.flowable.engine.impl.persistence.entity.HistoricDetailEntity;
-import org.flowable.engine.impl.persistence.entity.HistoricDetailVariableInstanceUpdateEntity;
-import org.flowable.engine.impl.persistence.entity.HistoricDetailVariableInstanceUpdateEntityImpl;
-import org.flowable.engine.impl.persistence.entity.HistoricFormPropertyEntity;
-import org.flowable.engine.impl.persistence.entity.HistoricFormPropertyEntityImpl;
+import org.flowable.engine.impl.persistence.entity.*;
 import org.flowable.engine.impl.persistence.entity.data.HistoricDetailDataManager;
 import org.flowable.mongodb.cfg.MongoDbProcessEngineConfiguration;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.client.model.Filters;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Joram Barrez

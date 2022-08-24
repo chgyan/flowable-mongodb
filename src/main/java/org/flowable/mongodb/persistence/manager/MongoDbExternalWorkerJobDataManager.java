@@ -12,26 +12,19 @@
  */
 package org.flowable.mongodb.persistence.manager;
 
-import java.util.Collections;
-import java.util.List;
-
+import com.mongodb.BasicDBObject;
+import com.mongodb.client.model.Filters;
 import org.bson.conversions.Bson;
 import org.flowable.common.engine.impl.Page;
 import org.flowable.common.engine.impl.persistence.entity.Entity;
-import org.flowable.engine.impl.persistence.entity.ExecutionEntityImpl;
 import org.flowable.job.api.ExternalWorkerJob;
-import org.flowable.job.api.Job;
 import org.flowable.job.service.impl.ExternalWorkerJobAcquireBuilderImpl;
 import org.flowable.job.service.impl.ExternalWorkerJobQueryImpl;
-import org.flowable.job.service.impl.SuspendedJobQueryImpl;
 import org.flowable.job.service.impl.persistence.entity.ExternalWorkerJobEntity;
 import org.flowable.job.service.impl.persistence.entity.ExternalWorkerJobEntityImpl;
-import org.flowable.job.service.impl.persistence.entity.SuspendedJobEntity;
 import org.flowable.job.service.impl.persistence.entity.data.ExternalWorkerJobDataManager;
-import org.flowable.job.service.impl.persistence.entity.data.SuspendedJobDataManager;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.client.model.Filters;
+import java.util.List;
 
 /**
  * @author Joram Barrez

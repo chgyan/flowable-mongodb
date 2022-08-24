@@ -12,11 +12,8 @@
  */
 package org.flowable.mongodb.persistence.manager;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-
+import com.mongodb.BasicDBObject;
+import com.mongodb.client.model.Filters;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.flowable.common.engine.api.FlowableIllegalArgumentException;
@@ -27,8 +24,9 @@ import org.flowable.variable.service.impl.persistence.entity.VariableInstanceEnt
 import org.flowable.variable.service.impl.persistence.entity.data.VariableInstanceDataManager;
 import org.flowable.variable.service.impl.persistence.entity.data.impl.cachematcher.VariableInstanceByExecutionIdMatcher;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.client.model.Filters;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Joram Barrez

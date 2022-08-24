@@ -12,15 +12,14 @@
  */
 package org.flowable.mongodb.persistence.manager;
 
-import java.util.List;
-
+import com.mongodb.BasicDBObject;
+import com.mongodb.client.model.Filters;
 import org.flowable.common.engine.impl.persistence.entity.Entity;
 import org.flowable.identitylink.service.impl.persistence.entity.IdentityLinkEntity;
 import org.flowable.identitylink.service.impl.persistence.entity.IdentityLinkEntityImpl;
 import org.flowable.identitylink.service.impl.persistence.entity.data.IdentityLinkDataManager;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.client.model.Filters;
+import java.util.List;
 
 /**
  * @author Joram Barrez

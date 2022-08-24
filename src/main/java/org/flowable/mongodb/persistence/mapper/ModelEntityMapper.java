@@ -12,12 +12,7 @@
  */
 package org.flowable.mongodb.persistence.mapper;
 
-import java.util.Date;
-
 import org.bson.Document;
-import org.flowable.engine.ProcessEngineConfiguration;
-import org.flowable.engine.impl.persistence.entity.ModelEntityImpl;
-import org.flowable.mongodb.persistence.EntityToDocumentMapper;
 import org.flowable.mongodb.persistence.entity.MongoDbModelEntityImpl;
 
 /**

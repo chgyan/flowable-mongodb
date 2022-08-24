@@ -12,10 +12,8 @@
  */
 package org.flowable.mongodb.persistence;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoDatabase;
 import org.flowable.common.engine.impl.context.Context;
 import org.flowable.common.engine.impl.interceptor.CommandContext;
 import org.flowable.common.engine.impl.interceptor.Session;
@@ -23,14 +21,7 @@ import org.flowable.common.engine.impl.interceptor.SessionFactory;
 import org.flowable.common.engine.impl.persistence.cache.EntityCache;
 import org.flowable.common.engine.impl.persistence.entity.ByteArrayEntityImpl;
 import org.flowable.common.engine.impl.persistence.entity.Entity;
-import org.flowable.engine.impl.persistence.entity.ActivityInstanceEntityImpl;
-import org.flowable.engine.impl.persistence.entity.CommentEntityImpl;
-import org.flowable.engine.impl.persistence.entity.DeploymentEntityImpl;
-import org.flowable.engine.impl.persistence.entity.ExecutionEntityImpl;
-import org.flowable.engine.impl.persistence.entity.HistoricActivityInstanceEntityImpl;
-import org.flowable.engine.impl.persistence.entity.HistoricDetailEntityImpl;
-import org.flowable.engine.impl.persistence.entity.HistoricProcessInstanceEntityImpl;
-import org.flowable.engine.impl.persistence.entity.ResourceEntityImpl;
+import org.flowable.engine.impl.persistence.entity.*;
 import org.flowable.eventsubscription.service.impl.persistence.entity.CompensateEventSubscriptionEntityImpl;
 import org.flowable.eventsubscription.service.impl.persistence.entity.MessageEventSubscriptionEntityImpl;
 import org.flowable.eventsubscription.service.impl.persistence.entity.SignalEventSubscriptionEntityImpl;
@@ -40,54 +31,16 @@ import org.flowable.job.service.impl.persistence.entity.JobEntityImpl;
 import org.flowable.job.service.impl.persistence.entity.TimerJobEntityImpl;
 import org.flowable.mongodb.persistence.entity.MongoDbModelEntityImpl;
 import org.flowable.mongodb.persistence.entity.MongoDbProcessDefinitionEntityImpl;
-import org.flowable.mongodb.persistence.manager.AbstractMongoDbDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbActivityInstanceDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbCommentDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbDeploymentDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbEventSubscriptionDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbExecutionDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbHistoricActivityInstanceDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbHistoricDetailDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbHistoricIdentityLinkDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbHistoricProcessInstanceDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbHistoricTaskInstanceDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbHistoricVariableInstanceDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbIdentityLinkDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbJobByteArrayDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbJobDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbModelDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbProcessDefinitionDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbResourceDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbTaskDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbTimerJobDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbVariableInstanceDataManager;
-import org.flowable.mongodb.persistence.mapper.ActivityInstanceEntityMapper;
-import org.flowable.mongodb.persistence.mapper.CommentEntityMapper;
-import org.flowable.mongodb.persistence.mapper.DeploymentEntityMapper;
-import org.flowable.mongodb.persistence.mapper.EventSubscriptionEntityMapper;
-import org.flowable.mongodb.persistence.mapper.ExecutionEntityMapper;
-import org.flowable.mongodb.persistence.mapper.HistoricActivityInstanceEntityMapper;
-import org.flowable.mongodb.persistence.mapper.HistoricDetailEntityMapper;
-import org.flowable.mongodb.persistence.mapper.HistoricIdentityLinkEntityMapper;
-import org.flowable.mongodb.persistence.mapper.HistoricProcessInstanceEntityMapper;
-import org.flowable.mongodb.persistence.mapper.HistoricTaskInstanceEntityMapper;
-import org.flowable.mongodb.persistence.mapper.HistoricVariableInstanceEntityMapper;
-import org.flowable.mongodb.persistence.mapper.IdentityLinkEntityMapper;
-import org.flowable.mongodb.persistence.mapper.JobByteArrayEntityMapper;
-import org.flowable.mongodb.persistence.mapper.JobEntityMapper;
-import org.flowable.mongodb.persistence.mapper.ModelEntityMapper;
-import org.flowable.mongodb.persistence.mapper.ProcessDefinitionEntityMapper;
-import org.flowable.mongodb.persistence.mapper.ResourceEntityMapper;
-import org.flowable.mongodb.persistence.mapper.TaskEntityMapper;
-import org.flowable.mongodb.persistence.mapper.TimerJobEntityMapper;
-import org.flowable.mongodb.persistence.mapper.VariableInstanceEntityMapper;
+import org.flowable.mongodb.persistence.manager.*;
+import org.flowable.mongodb.persistence.mapper.*;
 import org.flowable.task.service.impl.persistence.entity.HistoricTaskInstanceEntityImpl;
 import org.flowable.task.service.impl.persistence.entity.TaskEntityImpl;
 import org.flowable.variable.service.impl.persistence.entity.HistoricVariableInstanceEntityImpl;
 import org.flowable.variable.service.impl.persistence.entity.VariableInstanceEntityImpl;
 
-import com.mongodb.MongoClient;
-import com.mongodb.client.MongoDatabase;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Joram Barrez

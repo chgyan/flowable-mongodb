@@ -1,7 +1,6 @@
 package org.flowable.mongodb.cfg;
 
 import org.flowable.eventsubscription.service.EventSubscriptionServiceConfiguration;
-import org.flowable.mongodb.persistence.MongoDbSessionFactory;
 import org.flowable.mongodb.persistence.manager.MongoDbEventSubscriptionDataManager;
 
 public class MongoDbEventSubscriptionServiceConfiguration extends EventSubscriptionServiceConfiguration {

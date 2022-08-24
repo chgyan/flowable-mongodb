@@ -13,14 +13,7 @@
 package org.flowable.mongodb.cfg;
 
 import org.flowable.job.service.JobServiceConfiguration;
-import org.flowable.mongodb.persistence.manager.MongoDbExecutionDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbExternalWorkerJobDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbJobDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbTimerJobDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbDeadLetterJobDataManager;
-import org.flowable.mongodb.persistence.manager.MongoDbSuspendedJobDataManager;
-
-import com.mongodb.Mongo;
+import org.flowable.mongodb.persistence.manager.*;
 
 /**
  * @author Joram Barrez

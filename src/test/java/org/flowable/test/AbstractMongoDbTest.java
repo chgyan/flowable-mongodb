@@ -63,8 +63,8 @@ public class AbstractMongoDbTest {
     }
 
     protected void initProcessEngine() {
-        this.processEngineConfiguration = (MongoDbProcessEngineConfiguration) new MongoDbProcessEngineConfiguration()
-                .setServerAddresses(Arrays.asList(new ServerAddress("localhost", 27017)))
+        this.processEngineConfiguration = (MongoDbProcessEngineConfiguration) new MongoDbProcessEngineConfiguration().setUri("mongodb://127.0.0.1:27017")
+//                .setServerAddresses(Arrays.asList(new ServerAddress("localhost", 27017)))
                 .setDisableIdmEngine(true);
         
         DefaultAsyncJobExecutor asyncJobExecutor = new DefaultAsyncJobExecutor();

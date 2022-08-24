@@ -13,7 +13,6 @@
 package org.flowable.mongodb.persistence.mapper;
 
 import org.bson.Document;
-import org.flowable.mongodb.persistence.EntityToDocumentMapper;
 import org.flowable.task.service.impl.persistence.entity.TaskEntityImpl;
 
 /**

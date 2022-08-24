@@ -12,8 +12,7 @@
  */
 package org.flowable.mongodb.persistence.manager;
 
-import java.util.List;
-
+import com.mongodb.BasicDBObject;
 import org.flowable.common.engine.impl.persistence.entity.Entity;
 import org.flowable.engine.impl.persistence.entity.CommentEntity;
 import org.flowable.engine.impl.persistence.entity.CommentEntityImpl;
@@ -22,7 +21,7 @@ import org.flowable.engine.task.Comment;
 import org.flowable.engine.task.Event;
 import org.flowable.mongodb.cfg.MongoDbProcessEngineConfiguration;
 
-import com.mongodb.BasicDBObject;
+import java.util.List;
 
 /**
  * @author Tijs Rademakers
