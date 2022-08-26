@@ -89,7 +89,9 @@ public class MongoDbTaskDataManager extends AbstractMongoDbDataManager<TaskEntit
 
     @Override
     public List<Task> findTasksWithRelatedEntitiesByQueryCriteria(TaskQueryImpl taskQuery) {
-        throw new UnsupportedOperationException();
+        //TODO 临时改成和上面一致。 先不挂接variables chengy 2022.08.05
+        return findTasksByQueryCriteria(taskQuery);
+//        throw new UnsupportedOperationException();
     }
 
     @Override

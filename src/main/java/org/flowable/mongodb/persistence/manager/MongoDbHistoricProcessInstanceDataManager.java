@@ -23,12 +23,15 @@ import org.flowable.engine.impl.persistence.entity.HistoricProcessInstanceEntity
 import org.flowable.engine.impl.persistence.entity.HistoricProcessInstanceEntityImpl;
 import org.flowable.engine.impl.persistence.entity.data.HistoricProcessInstanceDataManager;
 import org.flowable.mongodb.cfg.MongoDbProcessEngineConfiguration;
+import org.flowable.mongodb.persistence.bean.RelationBean;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import static org.flowable.mongodb.persistence.manager.MongoDbProcessDefinitionDataManager.COLLECTION_PROCESS_DEFINITIONS;
 
 /**
  * @author Tijs Rademakers
@@ -86,12 +89,14 @@ public class MongoDbHistoricProcessInstanceDataManager extends AbstractMongoDbDa
 
     @Override
     public List<HistoricProcessInstance> findHistoricProcessInstancesByQueryCriteria(HistoricProcessInstanceQueryImpl historicProcessInstanceQuery) {
-        return getMongoDbSession().find(COLLECTION_HISTORIC_PROCESS_INSTANCES, createFilter(historicProcessInstanceQuery));
+
+        return getMongoDbSession().findAggregates(COLLECTION_HISTORIC_PROCESS_INSTANCES, createFilter(historicProcessInstanceQuery),
+                new RelationBean(COLLECTION_PROCESS_DEFINITIONS, "processDefinitionId", "_id", "processDefinition"));
     }
 
     @Override
     public long findHistoricProcessInstanceCountByQueryCriteria(HistoricProcessInstanceQueryImpl historicProcessInstanceQuery) {
-        throw new UnsupportedOperationException();
+        return getMongoDbSession().count(COLLECTION_HISTORIC_PROCESS_INSTANCES, createFilter(historicProcessInstanceQuery));
     }
 
     @Override
@@ -116,6 +121,10 @@ public class MongoDbHistoricProcessInstanceDataManager extends AbstractMongoDbDa
 
     protected Bson createFilter(HistoricProcessInstanceQueryImpl processInstanceQuery) {
         List<Bson> andFilters = new ArrayList<>();
+        if(processInstanceQuery.getStartedBy() != null){
+            andFilters.add(Filters.eq("startUserId", processInstanceQuery.getStartedBy()));
+        }
+
         if (processInstanceQuery.getProcessInstanceId() != null) {
             andFilters.add(Filters.eq("processInstanceId", processInstanceQuery.getProcessInstanceId()));
         }

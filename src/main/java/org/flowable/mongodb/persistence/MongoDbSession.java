@@ -15,6 +15,7 @@ package org.flowable.mongodb.persistence;
 import com.mongodb.BasicDBObject;
 import com.mongodb.ClientSessionOptions;
 import com.mongodb.client.*;
+import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
@@ -30,6 +31,7 @@ import org.flowable.common.engine.impl.persistence.cache.EntityCache;
 import org.flowable.common.engine.impl.persistence.entity.AlwaysUpdatedPersistentObject;
 import org.flowable.common.engine.impl.persistence.entity.Entity;
 import org.flowable.engine.impl.util.CommandContextUtil;
+import org.flowable.mongodb.persistence.bean.RelationBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -327,7 +329,7 @@ public class MongoDbSession implements Session {
     }
     
     @SuppressWarnings("unchecked")
-    public <T> List<T> mapToEntities(String collection, FindIterable<Document> documents) {
+    public <T> List<T> mapToEntities(String collection, MongoIterable<Document> documents) {
         EntityToDocumentMapper<? extends Entity> entityMapper = mongoDbSessionFactory.getCollectionToMapper().get(collection);
         List<Object> entities = new ArrayList<>();
         for (Document document : documents) {
@@ -337,7 +339,7 @@ public class MongoDbSession implements Session {
         return cacheLoadOrStore(entities);
     }
     
-    public List<Entity> mapToEntitiesType(String collection, FindIterable<Document> documents) {
+    public List<Entity> mapToEntitiesType(String collection, MongoIterable<Document> documents) {
         EntityToDocumentMapper<? extends Entity> entityMapper = mongoDbSessionFactory.getCollectionToMapper().get(collection);
         List<Object> entities = new ArrayList<>();
         for (Document document : documents) {
@@ -373,6 +375,32 @@ public class MongoDbSession implements Session {
         }
         
         return documentResult;
+    }
+
+    public <T> List<T> findAggregates(String collection, Bson bsonFilter, RelationBean bean) {
+        AggregateIterable<Document> documents = findAggregates(collection, bsonFilter, null ,0 ,bean);
+        return mapToEntities(collection, documents);
+    }
+
+    public AggregateIterable<Document> findAggregates(String collection, Bson bsonFilter, Bson bsonSort, int limit, RelationBean bean) {
+        MongoCollection<Document> mongoDbCollection = getCollection(collection);
+
+        List<Bson> aggregateList = new ArrayList<>(1);
+        aggregateList.add(Aggregates.lookup(bean.getRelationCollection(), bean.getLocalField(), bean.getRelationField(), bean.getAsName()));
+
+        if (bsonFilter != null) {
+            aggregateList.add(Aggregates.match(bsonFilter));
+        }
+        if (bsonSort != null) {
+            aggregateList.add(Aggregates.sort(bsonSort));
+        }
+
+        if(limit > 0){
+            aggregateList.add(Aggregates.limit(limit));
+        }
+
+        AggregateIterable<Document> aggregateIterable = mongoDbCollection.aggregate(aggregateList);
+        return aggregateIterable;
     }
     
     @SuppressWarnings("unchecked")

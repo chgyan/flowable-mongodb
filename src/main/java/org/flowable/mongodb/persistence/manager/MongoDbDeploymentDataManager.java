@@ -13,6 +13,8 @@
 package org.flowable.mongodb.persistence.manager;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.client.model.Filters;
+import org.bson.conversions.Bson;
 import org.flowable.common.engine.impl.persistence.entity.Entity;
 import org.flowable.engine.impl.DeploymentQueryImpl;
 import org.flowable.engine.impl.persistence.entity.DeploymentEntity;
@@ -21,6 +23,7 @@ import org.flowable.engine.impl.persistence.entity.data.DeploymentDataManager;
 import org.flowable.engine.repository.Deployment;
 import org.flowable.mongodb.cfg.MongoDbProcessEngineConfiguration;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -53,12 +56,12 @@ public class MongoDbDeploymentDataManager extends AbstractMongoDbDataManager<Dep
     @Override
     public long findDeploymentCountByQueryCriteria(DeploymentQueryImpl deploymentQuery) {
         // TODO: extract and do properly
-        return getMongoDbSession().count(COLLECTION_DEPLOYMENT, null);
+        return getMongoDbSession().count(COLLECTION_DEPLOYMENT, createFilter(deploymentQuery));
     }
 
     @Override
     public List<Deployment> findDeploymentsByQueryCriteria(DeploymentQueryImpl deploymentQuery) {
-        return getMongoDbSession().find(COLLECTION_DEPLOYMENT, null);
+        return getMongoDbSession().find(COLLECTION_DEPLOYMENT, createFilter(deploymentQuery));
     }
 
     @Override
@@ -74,6 +77,20 @@ public class MongoDbDeploymentDataManager extends AbstractMongoDbDataManager<Dep
     @Override
     public long findDeploymentCountByNativeQuery(Map<String, Object> parameterMap) {
         throw new UnsupportedOperationException();
+    }
+
+    protected Bson createFilter(DeploymentQueryImpl processInstanceQuery) {
+        List<Bson> andFilters = new ArrayList<>();
+        if(processInstanceQuery.getDeploymentId() != null){
+            andFilters.add(Filters.eq("_id", processInstanceQuery.getDeploymentId()));
+        }
+
+        Bson filter = null;
+        if (andFilters.size() > 0) {
+            filter = Filters.and(andFilters.toArray(new Bson[andFilters.size()]));
+        }
+
+        return filter;
     }
 
 }

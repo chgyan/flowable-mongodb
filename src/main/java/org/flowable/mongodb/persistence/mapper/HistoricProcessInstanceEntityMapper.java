@@ -15,6 +15,8 @@ package org.flowable.mongodb.persistence.mapper;
 import org.bson.Document;
 import org.flowable.engine.impl.persistence.entity.HistoricProcessInstanceEntityImpl;
 
+import java.util.List;
+
 /**
  * @author Tijs Rademakers
  */
@@ -41,7 +43,13 @@ public class HistoricProcessInstanceEntityMapper extends AbstractEntityToDocumen
         historicProcessInstanceEntity.setStartUserId(document.getString("startUserId"));
         historicProcessInstanceEntity.setSuperProcessInstanceId(document.getString("superProccessInstanceId"));
         historicProcessInstanceEntity.setTenantId(document.getString("tenantId"));
-        
+
+        //关联数据
+        Document doc = (Document)((List)document.get("processDefinition")).get(0);
+        historicProcessInstanceEntity.setDeploymentId(doc.getString("deploymentId"));
+        historicProcessInstanceEntity.setProcessDefinitionName(doc.getString("name"));
+        historicProcessInstanceEntity.setProcessDefinitionVersion(doc.getInteger("version"));
+
         return historicProcessInstanceEntity;
     }
 
